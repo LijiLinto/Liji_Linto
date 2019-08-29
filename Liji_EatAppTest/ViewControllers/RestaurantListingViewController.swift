@@ -227,7 +227,11 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
         }
         else // Show Alert if there no records
         {
-            simpleAlert(title: "Alert", msg: "No Restaurants found for this filter.")
+            let alert = UIAlertController(title: "Alert", message: ALERT_MSG, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                self.clearFilters()
+            }))
+            present(alert, animated: true, completion: nil)
         }
     }
     func getDollarPrice(priceValue:Int) -> String
@@ -244,15 +248,8 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
         }
     }
     
-    //MARK: - BUTTON ACTIONS
-    
-    @IBAction func btnApplyFiltersClicked(_ sender: Any) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: Storyboard.Main, bundle:nil)
-        let filterVC = storyBoard.instantiateViewController(withIdentifier: "FiltersViewController") as! FiltersViewController
-        self.navigationController?.pushViewController(filterVC , animated: true)
-    }
-    
-    @IBAction func btnClearFilterClicked(_ sender: Any) {
+    func clearFilters()
+    {
         SharedClass.cuisineIds = []
         SharedClass.neighbourhoodIds = []
         SharedClass.priceLevels = []
@@ -272,16 +269,29 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
         btnClearFilter.isHidden = true
         
         // call the API with empty filters
-        
+        hud.show(in: self.view)
         api.getRestaurantData(){ (restaurant) in
             if let restaurant = restaurant
             {
+                self.hud.dismiss(afterDelay: 0)
                 self.arrOfRestaurants = restaurant.data ?? []
                 self.tblViewRestaurantList.reloadData()
                 self.scrollToTopOfList()
             }
             
         }
+    }
+    
+    //MARK: - BUTTON ACTIONS
+    
+    @IBAction func btnApplyFiltersClicked(_ sender: Any) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: Storyboard.Main, bundle:nil)
+        let filterVC = storyBoard.instantiateViewController(withIdentifier: "FiltersViewController") as! FiltersViewController
+        self.navigationController?.pushViewController(filterVC , animated: true)
+    }
+    
+    @IBAction func btnClearFilterClicked(_ sender: Any) {
+        clearFilters()
     }
     
 }

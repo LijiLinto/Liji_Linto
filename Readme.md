@@ -9,10 +9,10 @@ A sample video of the project
 [![IMAGE ALT TEXT HERE](https://i9.ytimg.com/vi/Dykw7iD-l64/mq2.jpg?sqp=CKCloOsF&rs=AOn4CLD7rDr6L8K28xy7hVqsrpoOVYZy_w)](https://www.youtube.com/watch?v=Dykw7iD-l64)
 
 ## Authors
-    * **Liji Linto** - *Initial work*
+* **Liji Linto** - *Initial work*
 
 ## Acknowledgments
-    * EAT App
+* EAT App
     
 ```
 Feel free to download the code and review it.

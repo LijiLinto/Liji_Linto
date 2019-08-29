@@ -18,20 +18,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eatLogo" translatesAutoresizingMaskIntoConstraints="NO" id="hRA-bC-9m5">
-                                <rect key="frame" x="82.5" y="341" width="249" height="214"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="214" id="6pK-gm-2Q4"/>
-                                    <constraint firstAttribute="width" constant="249" id="Fbt-bz-x3m"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eatLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Xn6-uT-kLk">
+                                <rect key="frame" x="50" y="360.5" width="314" height="175.5"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="hRA-bC-9m5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Cmt-NK-MjO"/>
-                            <constraint firstItem="hRA-bC-9m5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Jeo-3K-3yy"/>
-                            <constraint firstItem="hRA-bC-9m5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Kim-Ok-L6e"/>
-                            <constraint firstItem="hRA-bC-9m5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ev6-A3-F1R"/>
+                            <constraint firstItem="Xn6-uT-kLk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Brd-iW-Tk2"/>
+                            <constraint firstItem="Xn6-uT-kLk" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="k6g-Jx-0wp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -42,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="eatLogo" width="110" height="95"/>
+        <image name="eatLogo" width="314" height="175.5"/>
     </resources>
 </document>

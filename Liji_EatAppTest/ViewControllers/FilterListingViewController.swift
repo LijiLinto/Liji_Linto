@@ -16,7 +16,6 @@ class FilterListingViewController: UIViewController,UITableViewDelegate,UITableV
     
     //MARK: - DECLARATIONS
     var pageTitle: String?
-    var arrFilters = [FilterCellModel]()
     
     //MARK: - VIEWCONTROLLER LIFECYCLE METHODS
     override func viewDidLoad() {

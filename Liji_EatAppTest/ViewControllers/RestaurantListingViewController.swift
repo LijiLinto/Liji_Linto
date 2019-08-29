@@ -33,6 +33,7 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
         // LOADING RESTAURANT API
         api.getRestaurantData(cuisineIds: SharedClass.cuisineIds, neighbourhoodIds: SharedClass.neighbourhoodIds, priceLevels: SharedClass.priceLevels){ (restaurant) in
             
+            SharedClass.currentPage+=1
             if let restaurants = restaurant
             {
                 self.arrOfRestaurants = restaurants.data ?? []
@@ -89,9 +90,17 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
         
         print("Adding observer..")
         
+        if let observer = observer
+        {
+            NotificationCenter.default.removeObserver(observer)
+        }
         observer = NotificationCenter.default.addObserver(forName: .refreshRestaurant, object: nil, queue: OperationQueue.main) { (notification) in
             self.hud.show(in: self.view)
-            self.api.getRestaurantData(cuisineIds: SharedClass.cuisineIds, neighbourhoodIds: SharedClass.neighbourhoodIds, priceLevels: SharedClass.priceLevels){ (restaurant) in
+            SharedClass.currentPage = 1
+            
+            self.api.getRestaurantData(page: SharedClass.currentPage, cuisineIds: SharedClass.cuisineIds, neighbourhoodIds: SharedClass.neighbourhoodIds, priceLevels: SharedClass.priceLevels){ (restaurant) in
+                
+                SharedClass.currentPage += 1
                 
                 print("Refreshing Restaurants....")
                 if let restaurants = restaurant
@@ -110,10 +119,10 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("removed observer..")
-        /*if let observer = observer
+        if let observer = observer
          {
-         NotificationCenter.default.removeObserver(observer)
-         }*/
+         //NotificationCenter.default.removeObserver(observer)
+         }
     }
     
     // MARK: - TABLEVIEW METHODS
@@ -164,6 +173,7 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
             {
                 // call the API to load more
                 print("Loading More Records")
+                hud.show(in: self.view)
                 api.getRestaurantData(page:SharedClass.currentPage, cuisineIds: SharedClass.cuisineIds, neighbourhoodIds: SharedClass.neighbourhoodIds, priceLevels: SharedClass.priceLevels){ (restaurant) in
                     
                     if let restaurants = restaurant
@@ -173,8 +183,9 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
                             for restaurant in restaurants
                             {
                                 self.arrOfRestaurants.append(restaurant)
+                                self.appendNewRestaurantToTable()
                             }
-                            self.tblViewRestaurantList.reloadData()
+                            
                             SharedClass.currentPage += 1
                         }
                         
@@ -193,6 +204,14 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
     }
     
     //MARK: - CUSTOM METHODS
+    
+    func appendNewRestaurantToTable (){
+        
+        self.tblViewRestaurantList.beginUpdates()
+        let selectedIndexPath = IndexPath(row: self.arrOfRestaurants.count - 1, section: 0)
+        self.tblViewRestaurantList.insertRows(at: [selectedIndexPath], with: .automatic)
+        self.tblViewRestaurantList.endUpdates()
+    }
     
     func initialSetup()
     {
@@ -254,6 +273,7 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
         SharedClass.neighbourhoodIds = []
         SharedClass.priceLevels = []
         SharedClass.filterType = FilterType.None
+        SharedClass.currentPage = 1
         
         //reset check boxes in the Filters
         for i in 0..<SharedClass.arrCusines.count
@@ -271,6 +291,8 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
         // call the API with empty filters
         hud.show(in: self.view)
         api.getRestaurantData(){ (restaurant) in
+            SharedClass.currentPage += 1
+            
             if let restaurant = restaurant
             {
                 self.hud.dismiss(afterDelay: 0)

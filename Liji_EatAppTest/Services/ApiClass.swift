@@ -13,24 +13,23 @@ import Alamofire
 class Api {
     
     //MARK: -  FETCH RESTAURANTS
-   func getRestaurantData(page: Int = 1, searchText: String = "", cuisineIds: [String] = [], neighbourhoodIds: [String] = [], regionId: String = REGION_ID, priceLevels: [Int] = [], limit: Int = 15, completion: @escaping RestaurantResponseCompletion) {
+    func getRestaurantData(page: Int = 1, searchText: String = "", cuisineIds: [String] = [], neighbourhoodIds: [String] = [], regionId: String = REGION_ID, priceLevels: [Int] = [], limit: Int = 5, completion: @escaping RestaurantResponseCompletion) {
         
         
         var urlParameters = RESTAURANT_URL +
-                        "page=\(page)&" +
-                        "limit=\(limit)&" +
-                        "region_id=\(regionId)&" +
-                        "q=\(searchText)&"
+            "page=\(page)&" +
+            "limit=\(limit)&" +
+        "region_id=\(regionId)"
         
-         var cusineParameter = ""
+        var cusineParameter = ""
         
         if(!cuisineIds.isEmpty && cuisineIds.count > 0){
-           
-            for i in 0..<cuisineIds.count
-          {
             
-            cusineParameter += "&cuisine_id[]=" + cuisineIds[i]
-          }
+            for i in 0..<cuisineIds.count
+            {
+                
+                cusineParameter += "&cuisine_id[]=" + cuisineIds[i]
+            }
             
         }
         
@@ -55,37 +54,41 @@ class Api {
         }
         
         urlParameters += cusineParameter +
-                    neighbourhoodParameter +
-                    priceLevelParameter
+            neighbourhoodParameter +
+        priceLevelParameter
         
-       // print(urlParameters)
+        //set search text
+        urlParameters += "&q=\(searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+        
+        //print(urlParameters)
         
         guard let url = URL(string: urlParameters) else { return }
         
         
         
-    Alamofire.request(url).responseJSON { (response) in
-        if let error = response.result.error {
-            debugPrint(error.localizedDescription)
-            completion(nil)
-            return
-        }
-        
-        guard let data = response.data else { return completion(nil) }
-        let jsonDecoder = JSONDecoder()
-        do {
-            let restaurants = try jsonDecoder.decode(RestaurantList.self, from: data)
-            if let totalRestaurantCount = restaurants.meta?.totalCount{
-                SharedClass.totalRestaurantsCount = totalRestaurantCount
+        Alamofire.request(url).responseJSON { (response) in
+            if let error = response.result.error {
+                debugPrint(error.localizedDescription)
+                completion(nil)
+                return
             }
-            completion(restaurants)
             
-        } catch {
-            debugPrint(error.localizedDescription)
-            completion(nil)
+            guard let data = response.data else { return completion(nil) }
+            let jsonDecoder = JSONDecoder()
+            do {
+                let restaurants = try jsonDecoder.decode(RestaurantList.self, from: data)
+                if let totalRestaurantCount = restaurants.meta?.totalCount{
+                    SharedClass.totalRestaurantsCount = totalRestaurantCount
+                    print(SharedClass.totalRestaurantsCount)
+                }
+                completion(restaurants)
+                
+            } catch {
+                debugPrint(error.localizedDescription)
+                completion(nil)
+            }
         }
     }
-}
     
     //MARK: -  FETCH CUISINE
     func getCuisines(completion: @escaping CuisineResponseCompletion) {
@@ -134,5 +137,5 @@ class Api {
             }
         }
     }
-
+    
 }

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Liji_EatAppTest/Services/ApiClass.swift"
-            timestampString = "588773169.335169"
+            timestampString = "588791716.493819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "getCuisines(completion:)"
             landmarkType = "7">
          </BreakpointContent>

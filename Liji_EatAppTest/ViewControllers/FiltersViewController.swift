@@ -78,7 +78,8 @@ class FiltersViewController: UIViewController, UITableViewDelegate,UITableViewDa
         case 1,2,3:
             if(SharedClass.priceLevels.contains(sender.tag) &&
                 !sender.isSelected){
-                SharedClass.priceLevels.remove(at: sender.tag)
+                let arrIndex = SharedClass.priceLevels.firstIndex(of: sender.tag)
+                SharedClass.priceLevels.remove(at: arrIndex!)
             }
             else{
                 if(sender.isSelected){
@@ -111,7 +112,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate,UITableViewDa
         }
     }
     
-    //MARK: - CUSTOM METHODS
+    /// CUSTOM METHODS
     func popToHomeViewController()
     {
         for controller in self.navigationController!.viewControllers as Array {

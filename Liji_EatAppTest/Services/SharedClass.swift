@@ -28,4 +28,6 @@ final class _SharedClass
     var filterType = FilterType.None
     var currentPage = 1
     var totalRestaurantsCount = 0
+    
+    
 }

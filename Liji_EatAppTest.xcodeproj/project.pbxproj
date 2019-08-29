@@ -20,12 +20,12 @@
 		2A7DB89E23169CE500E7DCCC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DB89D23169CE500E7DCCC /* Extensions.swift */; };
 		2A7DB8A02316AB1100E7DCCC /* FilterListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DB89F2316AB1100E7DCCC /* FilterListingViewController.swift */; };
 		2A7DB8A22316AD2500E7DCCC /* FilterListingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DB8A12316AD2500E7DCCC /* FilterListingCell.swift */; };
-		2A7DB8A42316BE7F00E7DCCC /* FilterCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DB8A32316BE7E00E7DCCC /* FilterCellModel.swift */; };
 		2A7DB8A62316DEA900E7DCCC /* RestaurantListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DB8A52316DEA900E7DCCC /* RestaurantListModel.swift */; };
 		2A7DB8A92316DFE600E7DCCC /* ApiClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DB8A82316DFE600E7DCCC /* ApiClass.swift */; };
 		2A7DB8AD2316FF1B00E7DCCC /* CuisineNeighbourhoodListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DB8AC2316FF1B00E7DCCC /* CuisineNeighbourhoodListModel.swift */; };
 		2A7DB8AF23170A3200E7DCCC /* SharedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7DB8AE23170A3200E7DCCC /* SharedClass.swift */; };
 		2AA2209E23179F5300E8AFC3 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA2209D23179F5300E8AFC3 /* File.swift */; };
+		2ADF661B23184862000EC692 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 2ADF661A23184862000EC692 /* Readme.md */; };
 		D3A42648FEFA1538310AA918 /* Pods_Liji_EatAppTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBF1B70FD733FA43414D6FC /* Pods_Liji_EatAppTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,12 +45,12 @@
 		2A7DB89D23169CE500E7DCCC /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2A7DB89F2316AB1100E7DCCC /* FilterListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListingViewController.swift; sourceTree = "<group>"; };
 		2A7DB8A12316AD2500E7DCCC /* FilterListingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListingCell.swift; sourceTree = "<group>"; };
-		2A7DB8A32316BE7E00E7DCCC /* FilterCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCellModel.swift; sourceTree = "<group>"; };
 		2A7DB8A52316DEA900E7DCCC /* RestaurantListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListModel.swift; sourceTree = "<group>"; };
 		2A7DB8A82316DFE600E7DCCC /* ApiClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClass.swift; sourceTree = "<group>"; };
 		2A7DB8AC2316FF1B00E7DCCC /* CuisineNeighbourhoodListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuisineNeighbourhoodListModel.swift; sourceTree = "<group>"; };
 		2A7DB8AE23170A3200E7DCCC /* SharedClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedClass.swift; sourceTree = "<group>"; };
 		2AA2209D23179F5300E8AFC3 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		2ADF661A23184862000EC692 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		EEC420CA5AF97D86EC5CA707 /* Pods-Liji_EatAppTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Liji_EatAppTest.release.xcconfig"; path = "Target Support Files/Pods-Liji_EatAppTest/Pods-Liji_EatAppTest.release.xcconfig"; sourceTree = "<group>"; };
 		F5A8D0D4B428FAAB75372F51 /* Pods-Liji_EatAppTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Liji_EatAppTest.debug.xcconfig"; path = "Target Support Files/Pods-Liji_EatAppTest/Pods-Liji_EatAppTest.debug.xcconfig"; sourceTree = "<group>"; };
 		FEBF1B70FD733FA43414D6FC /* Pods_Liji_EatAppTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Liji_EatAppTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +71,7 @@
 		2A7DB86E2316669000E7DCCC = {
 			isa = PBXGroup;
 			children = (
+				2ADF661A23184862000EC692 /* Readme.md */,
 				2A7DB8792316669000E7DCCC /* Liji_EatAppTest */,
 				2A7DB8782316669000E7DCCC /* Products */,
 				8F28796C3F80590B48D4B125 /* Pods */,
@@ -115,7 +116,6 @@
 		2A7DB88D2316691200E7DCCC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2A7DB8A32316BE7E00E7DCCC /* FilterCellModel.swift */,
 				2A7DB8A52316DEA900E7DCCC /* RestaurantListModel.swift */,
 				2A7DB8AC2316FF1B00E7DCCC /* CuisineNeighbourhoodListModel.swift */,
 			);
@@ -240,6 +240,7 @@
 			files = (
 				2A7DB8852316669100E7DCCC /* LaunchScreen.storyboard in Resources */,
 				2A7DB8822316669100E7DCCC /* Assets.xcassets in Resources */,
+				2ADF661B23184862000EC692 /* Readme.md in Resources */,
 				2A7DB8802316669000E7DCCC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,7 +302,6 @@
 				2AA2209E23179F5300E8AFC3 /* File.swift in Sources */,
 				2A7DB89E23169CE500E7DCCC /* Extensions.swift in Sources */,
 				2A7DB89C23169C0800E7DCCC /* CustomView.swift in Sources */,
-				2A7DB8A42316BE7F00E7DCCC /* FilterCellModel.swift in Sources */,
 				2A7DB87B2316669000E7DCCC /* AppDelegate.swift in Sources */,
 				2A7DB8AF23170A3200E7DCCC /* SharedClass.swift in Sources */,
 				2A7DB8A22316AD2500E7DCCC /* FilterListingCell.swift in Sources */,

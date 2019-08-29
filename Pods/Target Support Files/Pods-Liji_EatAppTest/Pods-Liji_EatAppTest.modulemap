@@ -1,0 +1,6 @@
+framework module Pods_Liji_EatAppTest {
+  umbrella header "Pods-Liji_EatAppTest-umbrella.h"
+
+  export *
+  module * { export * }
+}

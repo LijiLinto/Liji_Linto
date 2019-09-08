@@ -29,5 +29,18 @@ final class _SharedClass
     var currentPage = 1
     var totalRestaurantsCount = 0
     
-    
+    /// This function will return the Dollar string based on input price
+    public final func getDollarPrice(priceValue:Int) -> String
+    {
+        switch priceValue {
+        case 1:
+            return "$"
+        case 2:
+            return "$$"
+        case 3:
+            return "$$$"
+        default:
+            return "$"
+        }
+    }
 }

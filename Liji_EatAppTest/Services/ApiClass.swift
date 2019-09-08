@@ -60,7 +60,7 @@ class Api {
         //set search text
         urlParameters += "&q=\(searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
         
-        //print(urlParameters)
+        print(urlParameters)
         
         guard let url = URL(string: urlParameters) else { return }
         

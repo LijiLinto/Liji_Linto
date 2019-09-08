@@ -16,7 +16,6 @@ let RESTAURANT_URL = URL_BASE + "restaurants?"
 let CUISINE_URL = URL_BASE + "cuisines?region_id=" + REGION_ID
 let NEIGHBOURHOOD_URL = URL_BASE + "neighborhoods?region_id=" + REGION_ID
 
-let PAGINATION_LIMIT = 15
 let ALERT_MSG = "No Restaurants avaialble for this filter."
 
 typealias RestaurantResponseCompletion = (RestaurantList?) -> Void

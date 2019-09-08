@@ -22,6 +22,7 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
     var api = Api()
     var arrOfRestaurants = [RestaurantData]()
     var searchBar:UISearchBar!
+    var isLoading = false
     
     //MARK: - VIEWCONTROLLER LIFECYCLE METHODS
     override func viewDidLoad() {
@@ -86,7 +87,7 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        // add obsever for refreshing restaurant list based on filters
+        // first the existing observer if any and then add obsever for refreshing restaurant list based on filters
         
         print("Adding observer..")
         
@@ -116,14 +117,7 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
         }
         
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("removed observer..")
-        if let observer = observer
-         {
-         //NotificationCenter.default.removeObserver(observer)
-         }
-    }
+   
     
     // MARK: - TABLEVIEW METHODS
     
@@ -143,19 +137,7 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.RestaurantCell, for: indexPath) as? RestaurantCell
         {
-            cell.lblRestaurantName.text = arrOfRestaurants[indexPath.row].attributes?.name
-            cell.lblRestaurantAddress.text = arrOfRestaurants[indexPath.row].attributes?.addressLine1
-            cell.btnCuisine.setTitle(arrOfRestaurants[indexPath.row].attributes?.cuisine, for: .normal)
-            
-            cell.btnPrice.setTitle(getDollarPrice(priceValue: (arrOfRestaurants[indexPath.row].attributes?.priceLevel!)!), for: .normal)
-            
-            // download and cache images using Kingfisher
-            if let url = URL(string: arrOfRestaurants[indexPath.row].attributes?.imageURL ?? "") {
-                let placeholder = UIImage(named: "placeholder")
-                let options : KingfisherOptionsInfo = [KingfisherOptionsInfoItem.transition(.fade(0.1))]
-                cell.imgViewRestaurant.kf.indicatorType = .activity
-                cell.imgViewRestaurant.kf.setImage(with: url, placeholder: placeholder, options: options)
-            }
+            cell.restaurantData = arrOfRestaurants[indexPath.row]
             return cell
         }
         
@@ -166,13 +148,14 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         //PAGINATION
-        if indexPath.row == arrOfRestaurants.count - 1
+        if !isLoading && indexPath.row == arrOfRestaurants.count - 1
         {
+            isLoading = true
             // we are at the last cell, so now load more items
             if arrOfRestaurants.count < SharedClass.totalRestaurantsCount
             {
                 // call the API to load more
-                print("Loading More Records")
+               // print("Loading More Records")
                 hud.show(in: self.view)
                 api.getRestaurantData(page:SharedClass.currentPage, cuisineIds: SharedClass.cuisineIds, neighbourhoodIds: SharedClass.neighbourhoodIds, priceLevels: SharedClass.priceLevels){ (restaurant) in
                     
@@ -186,12 +169,12 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
                                 self.appendNewRestaurantToTable()
                             }
                             
+
                             SharedClass.currentPage += 1
                         }
-                        
+                        self.isLoading = false
                         self.hud.dismiss(afterDelay: 0)
-                        
-                        
+
                     }
                     
                 }
@@ -253,28 +236,17 @@ class RestaurantListingViewController: UIViewController, UITableViewDelegate,UIT
             present(alert, animated: true, completion: nil)
         }
     }
-    func getDollarPrice(priceValue:Int) -> String
-    {
-        switch priceValue {
-        case 1:
-            return "$"
-        case 2:
-            return "$$"
-        case 3:
-            return "$$$"
-        default:
-            return "$"
-        }
-    }
+  
     
     func clearFilters()
     {
+        // clear Arrays
         SharedClass.cuisineIds = []
         SharedClass.neighbourhoodIds = []
         SharedClass.priceLevels = []
         SharedClass.filterType = FilterType.None
         SharedClass.currentPage = 1
-        
+        isLoading = false
         //reset check boxes in the Filters
         for i in 0..<SharedClass.arrCusines.count
         {
@@ -325,12 +297,14 @@ extension RestaurantListingViewController: UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" // dismiss keyboard
         {
+            SharedClass.currentPage = 1
+            isLoading = false
             searchBar.resignFirstResponder()
         }
         // call API with SEARCH TEXT
         hud.show(in: self.view)
         api.getRestaurantData(searchText: searchText, cuisineIds: SharedClass.cuisineIds, neighbourhoodIds: SharedClass.neighbourhoodIds, priceLevels: SharedClass.priceLevels){ (restaurant) in
-            
+            SharedClass.currentPage += 1
             if let restaurant = restaurant
             {
                 self.hud.dismiss(afterDelay: 0)

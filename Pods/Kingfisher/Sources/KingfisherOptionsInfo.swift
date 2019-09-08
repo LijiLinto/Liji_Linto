@@ -196,7 +196,7 @@ extension Collection where Iterator.Element == KingfisherOptionsInfoItem {
     }
 }
 
-public extension Collection where Iterator.Element == KingfisherOptionsInfoItem {
+ extension Collection where Iterator.Element == KingfisherOptionsInfoItem {
     /// The target `ImageCache` which is used.
     public var targetCache: ImageCache? {
         if let item = lastMatchIgnoringAssociatedValue(.targetCache(.default)),

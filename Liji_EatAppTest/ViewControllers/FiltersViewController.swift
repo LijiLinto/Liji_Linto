@@ -61,12 +61,12 @@ class FiltersViewController: UIViewController, UITableViewDelegate,UITableViewDa
     
     //MARK: - BUTTON ACTIONS
     @IBAction func priceButtonClicked(_ sender: UIButton) {
-        
+        // The 4 price level bttons are stored as collection
         sender.isSelected = !sender.isSelected
         sender.applyButtonChanges(isSelected: sender.isSelected)
         
         switch sender.tag {
-        case 0:
+        case 0: // "All" Button
             priceButton[1].applyButtonChanges(isSelected: false)
             priceButton[2].applyButtonChanges(isSelected: false)
             priceButton[3].applyButtonChanges(isSelected: false)
@@ -75,7 +75,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate,UITableViewDa
             priceButton[3].isSelected = false
             
             SharedClass.priceLevels = []
-        case 1,2,3:
+        case 1,2,3: // "$, $$, $$$" Buttons
             if(SharedClass.priceLevels.contains(sender.tag) &&
                 !sender.isSelected){
                 let arrIndex = SharedClass.priceLevels.firstIndex(of: sender.tag)
